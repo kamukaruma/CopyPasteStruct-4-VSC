@@ -1,0 +1,71 @@
+{
+  "name": "copy-paste-folder-structure",
+  "displayName": "Copy Paste Folder Structure",
+  "description": "Copy and paste the folder structure of your project",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.91.1"
+  },
+  "activationEvents": [
+    "onCommand:extension.copyFolderStructure",
+    "onCommand:extension.pasteFolderStructure"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.copyFolderStructure",
+        "title": "Copy Folder Structure"
+      },
+      {
+        "command": "extension.pasteFolderStructure",
+        "title": "Paste Folder Structure"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "extension.copyFolderStructure",
+          "group": "navigation",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "extension.pasteFolderStructure",
+          "group": "navigation",
+          "when": "explorerResourceIsFolder"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Copy Paste Folder Structure",
+      "properties": {
+        "copyPasteFolderStructure.defaultFormat": {
+          "type": "string",
+          "default": "Indented",
+          "description": "Default format for copying folder structure.",
+          "enum": ["Tree", "Indented"]
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.91.1",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "16.x",
+    "eslint": "^8.14.0",
+    "glob": "^7.1.7",
+    "mocha": "^10.0.0",
+    "typescript": "^4.6.2",
+    "vscode-test": "^1.6.2"
+  }
+}
